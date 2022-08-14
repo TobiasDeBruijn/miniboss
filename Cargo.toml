@@ -1,0 +1,10 @@
+[workspace]
+members = [
+	"dal",
+	"proto",
+	"routes",
+	"miniboss"
+]
+
+[patch.crates-io]
+refinery = { path = "./deps/refinery/refinery" }
