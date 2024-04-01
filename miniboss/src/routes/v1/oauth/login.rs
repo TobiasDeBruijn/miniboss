@@ -9,7 +9,7 @@ use std::collections::HashSet;
 #[derive(Deserialize)]
 pub struct Request {
     authorization: String,
-    email: String,
+    username: String,
     password: String,
 }
 
@@ -27,7 +27,7 @@ pub async fn login(
         .await?
         .ok_or(WebError::NotFound)?;
 
-    let user = User::get_by_email(&database, &payload.email).await?
+    let user = User::get_by_email(&database, &payload.username).await?
         .ok_or(WebError::Unauthorized)?;
 
     if !user.verify_password(&payload.password, &config.password_pepper, &database).await? {

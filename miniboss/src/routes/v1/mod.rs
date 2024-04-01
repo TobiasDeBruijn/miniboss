@@ -4,6 +4,7 @@ use actix_web::web::ServiceConfig;
 
 mod oauth;
 mod user;
+mod clients;
 
 pub struct Router;
 
@@ -12,6 +13,7 @@ impl Routable for Router {
         config.service(web::scope("/v1")
             .configure(oauth::Router::configure)
             .configure(user::Router::configure)
+            .configure(clients::Router::configure)
         );
     }
 }

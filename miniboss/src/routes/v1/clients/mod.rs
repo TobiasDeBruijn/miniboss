@@ -2,16 +2,14 @@ use actix_route_config::Routable;
 use actix_web::web;
 use actix_web::web::ServiceConfig;
 
-mod register;
-mod info;
+mod internal;
 
 pub struct Router;
 
 impl Routable for Router {
     fn configure(config: &mut ServiceConfig) {
-        config.service(web::scope("/user")
-            .route("/register", web::post().to(register::register))
-            .route("/info", web::get().to(info::info))
+        config.service(web::scope("/clients")
+            .route("/internal", web::get().to(internal::internal))
         );
     }
 }

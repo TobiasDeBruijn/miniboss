@@ -10,6 +10,8 @@ mod authorize;
 mod token;
 mod login;
 mod token_info;
+mod authorization;
+mod authorization_info;
 
 pub struct Router;
 
@@ -20,6 +22,8 @@ impl Routable for Router {
             .route("/login", web::post().to(login::login))
             .route("/token", web::post().to(token::token))
             .route("/token-info", web::get().to(token_info::token_info))
+            .route("/authorization-info", web::get().to(authorization_info::authorization_info))
+            .route("/authorization", web::get().to(authorization::authorization))
         );
     }
 }

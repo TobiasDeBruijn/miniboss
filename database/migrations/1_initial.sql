@@ -47,7 +47,8 @@ CREATE TABLE oauth2_authorization_codes (
 CREATE TABLE users (
     user_id VARCHAR(64) NOT NULL,
     name TEXT NOT NULL,
-    is_espo_admin BOOL,
+    email TEXT NOT NULL,
+    is_admin BOOL,
     PRIMARY KEY (user_id)
 );
 

@@ -1,3 +1,4 @@
+use serde::Serialize;
 use sqlx::{FromRow, Result};
 use thiserror::Error;
 
@@ -5,7 +6,7 @@ use crate::driver::Database;
 use crate::generate_string;
 use crate::hash::{hash, verify};
 
-#[derive(Debug, Clone, FromRow)]
+#[derive(Debug, Clone, FromRow, Serialize)]
 pub struct User {
     pub user_id: String,
     pub name: String,
@@ -83,7 +84,7 @@ impl User {
             return Ok(false)
         }
 
-        let stored_password: String = sqlx::query_scalar("SELECT password FROM users WHERE user_id = ?")
+        let stored_password: String = sqlx::query_scalar("SELECT password FROM user_credentials WHERE user_id = ?")
             .bind(&self.user_id)
             .fetch_one(&**driver)
             .await?;
